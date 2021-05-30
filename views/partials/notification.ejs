@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid row">
+        <div class="row">
+            <div class="col-6">
+                <div class="row  m-0 p-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <img src="/img/logo_w.png" alt="">
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users/logout" class="col nav-link">logout</a>
+                        </li>
+                        <li class="nav-item links logout">
+                            <a href="/users/register" class="col nav-link">Register</a>
+                        </li>
+                        <li class="nav-item links logout">
+                            <a href="/users/login" class="col nav-link">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row m-0 p-0 text-right">
+                    <% if(typeof name !='undefined' ){ %>
+                        <span class="col-5 m-0 p-0 text-center align-self-center" id="alertLog"></span>
+                        <span class="col-5 fn text-right align-self-center ">
+                            <%= name.name%>
+                        </span>
+                        <div class="col-1 text-right p-0 text-center adminMain">
+                            <div class="userNote my-1 p-0">
+                                <span class="cr p-1 userNote userShort">
+                                    <%= name.shortName%>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-1 align-self-center ">
+                            <div id="countNot" class="text-center align-self-center p-1 hide">
+                            </div>
+                            <div class="container notificationBox mt-5">
+                                <ul class="card p-0">
+                                    <% name.notification.forEach((note, i)=>{%>
+                                        <li id="<%= i %>" class="row m-0 px-2 py-1 divide notifRow <%= note.view %>">
+                                            <div class="col-12 row m-0 p-0 container">
+                                                <div class="col-10">
+                                                    <div class="col-12 m-0 p-0  text-left">
+                                                        <%= note.msg%>
+                                                    </div>
+                                                    <div class="col-12 m-0 p-0 time  text-left">
+                                                        <% let date=new Date(note.time).toString().split(" "); %>
+                                            <%= `${date[0]} ,${date[2]} ${date[1]} - ${date[4]}` %>
+                                        </div>
+                                    </div>
+                                    <div class=" col my-2 p-0 containerUsers text-center adminNote">
+                                                            <div class="userNote my-1 p-0">
+                                                                <span class="cr p-1 userNote">
+                                                                    <%= note.short%>
+                                                                </span>
+                                                            </div>
+                                                    </div>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                            </div>
+                            <i class="notifctionBall fas fa-bell text-white"></i>
+                        </div>
+                        <% }%>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

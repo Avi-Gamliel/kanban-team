@@ -1,0 +1,98 @@
+<%- include ('partials/notification') %>
+
+    <div class="container">
+
+        <form action='' method="" class="px-2 my-2">
+            <button id="formAddBoard" type="button" class="btn btn-primary formAddBoard">Add new Board</button>
+        </form>
+
+        <div class="containerBoard row mt-2 m-0 p-0" id="<%= login %>">
+            <div class="row m-0 p-2 bg-lighten">
+                <h4 class="text-center">My Board</h4>
+            </div>
+            <% msg.forEach(function(m){ %>
+                <div id='<%= m.page_id %>' class="col-3 p-2 boxBoard">
+                    <div class="card text-center" id="<%= m._id %>">
+                        <div contenteditable="true" class="card-header">
+                            <%= m.name_board %>
+                        </div>
+                        <div class="card-body">
+                            <p contenteditable="true" class="card-text">
+                                <%= m.name_desc %>
+                            </p>
+                            <form action="/<%= m.custumer_id[0]._id %>/dashboard/<%= m.page_id %>?v=<%= user %>"
+                                method="post">
+                                <button class="btn btn-primary">Plan</button>
+                            </form>
+                        </div>
+                        <div class="saveboard card-footer text-muted row m-0 p-0 ">
+                            <i id="saveboard"
+                                class="col py-2 saveboard fas fa-cloud-upload-alt align-middle text-left"></i>
+                            <% m.custumers_share.forEach(user=>{ %>
+                                <div class="col my-1 mx-1 p-0 containerUsers">
+                                    <div class="users my-1 p-0 text-center">
+                                        <span class="cr p-1" title="<%= user.name %>">
+                                            <%= user.shortName%>
+                                        </span>
+                                    </div>
+                                </div>
+                                <% })%>
+                                    <div class="col my-1 mx-1 p-0 containerUsers text-center">
+                                        <div class="admin my-1 p-0">
+                                            <span class="cr p-1" title="<%= m.custumer_id[0].name %>">
+                                                <%= m.custumer_id[0].shortName %>
+                                            </span>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+
+        <div class="containerBoardSahre row mt-2 m-0 p-0">
+            <div class="row m-0 p-2 bg-lighten">
+                <h4 class="text-center">Share Board</h4>
+            </div>
+            <% msgShare.forEach(function(m){ %>
+                <div id='<%= m.page_id %>' class="col-3 p-2 boxBoard">
+                    <div class="card text-center" id="<%= m._id %>">
+                        <div contenteditable="true" class="card-header">
+                            <%= m.name_board %>
+                        </div>
+                        <div class="card-body">
+                            <p contenteditable="true" class="card-text">
+                                <%= m.name_desc %>
+                            </p>
+                            <form action="/<%= m.custumer_id[0]._id %>/dashboard/<%= m.page_id %>?v=<%= user %>"
+                                method="post">
+                                <button class="btn btn-warning">Plan</button>
+                            </form>
+                        </div>
+                        <div class="saveboard card-footer text-muted row m-0 p-0 ">
+                            <i id="saveboard"
+                                class="col py-2 saveboard fas fa-cloud-upload-alt align-middle text-left"></i>
+                            <% m.custumers_share.forEach(user=>{ %>
+                                <div class="col my-1 mx-1 p-0 containerUsers">
+                                    <div class="users my-1 p-0 text-center">
+                                        <span class="cr p-1" title="<%= user.name %>">
+                                            <%= user.shortName%>
+                                        </span>
+                                    </div>
+                                </div>
+                                <% })%>
+                                    <div class="col my-1 mx-1 p-0 containersAdminShare text-center">
+                                        <div class="adminShare my-1 p-0">
+                                            <span class="cr p-1" title="<%= m.custumer_id[0].name %>">
+                                                <%= m.custumer_id[0].shortName %>
+                                            </span>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+    </div>
+
+    <script src='/js/home.js'></script>
